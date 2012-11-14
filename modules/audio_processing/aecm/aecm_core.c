@@ -522,8 +522,9 @@ static void ResetAdaptiveChannelC(AecmCore_t* aecm)
 static void WebRtcAecm_InitNeon(void)
 {
   // TODO(kma): Check why WebRtcAecm_InverseFFTAndWindowNeon() doesn't work.
-  WebRtcAecm_WindowAndFFT = WebRtcAecm_WindowAndFFTNeon;
-  WebRtcAecm_InverseFFTAndWindow = InverseFFTAndWindowC;
+  // WARNING: It seems that WebRtcAecm_InverseFFTAndWindowNeon() is in fact working but not WebRtcAecm_WindowAndFFTNeon()!
+  WebRtcAecm_WindowAndFFT = WindowAndFFTC; //WebRtcAecm_WindowAndFFTNeon;
+  WebRtcAecm_InverseFFTAndWindow = WebRtcAecm_InverseFFTAndWindowNeon; //InverseFFTAndWindowC;
   WebRtcAecm_StoreAdaptiveChannel = WebRtcAecm_StoreAdaptiveChannelNeon;
   WebRtcAecm_ResetAdaptiveChannel = WebRtcAecm_ResetAdaptiveChannelNeon;
   WebRtcAecm_CalcLinearEnergies = WebRtcAecm_CalcLinearEnergiesNeon;
